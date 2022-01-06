@@ -1,71 +1,35 @@
-<!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-#MyLogo {
-  height: 45px;
-  width: 70px; 
-}
-#searchBox{
-  height: 40;
-  width: 400;
-}
-#searchButton{
-  height: 40;
-  width: 60;
-}
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-</head>
-<body>
-<div class="topnav">
-  <a href="/">
-    <img id="MyLogo" src= "static/images/store_logo.png"/>
-  </a>  
+  <head>
+  <title>Home Page</title>
+  <link rel="stylesheet" href="CSS/home.css?=1.1"/>
+  <link rel="stylesheet" href="CSS/style.css?=1.1"/>
+  </head>
+  <body>
+  <div id="logo">
+	<a href="/">
+		<img id="MyLogo" src= "static/images/store_logo.png"/>
+	</a>
   <form>
 		<input id="searchBox" type="text" name="searchData">
 		<input id="searchButton" type="submit" value="Search">
 	</form>
-  {% if not loggedIn %}
+  	{% if not loggedIn %}
 	<div id="signInButton">
-		<a class="active" href="/loginForm">Sign In</a>
+		<a class="link" href="/loginForm">Sign In</a>
   </div>
     {% else %}
-		<button class="link">Hello, <br> {{firstName}}</button>
-			<a href="/checkout">Order History</a>
+		<button class="link">Hello, <br>{{firstName}}</button>
+			<a href="/checkout">Your Order History</a>
 			<hr>
 			<a href="/logout">Sign Out</a>
+      
   	{% endif %}
-	<a class="link" href="/cart"> Cart {{numItems}} </a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
+	<div id="cart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shopping-cart.png')}} id="cartIcon" />
+			Cart {{numItems}}
+		</a>
+	</div>
 </div>
 <div class="display">
 	<div class="displayCategory">
@@ -107,6 +71,5 @@ body {
 		{% endfor %}
 	</div>
 </div>
-
-</body>
-</html>
+  </body>
+  </html>

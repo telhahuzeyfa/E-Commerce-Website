@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Product Description</title>
+<link rel="stylesheet" href={{url_for('static',
+filename='CSS/home.css')}} /> 
+<link rel="stylesheet" href={{ url_for('static', filename='CSS/style.css')}} />
+<link rel="stylesheet" href='CSS/topNav.css'>
+</head>
+<body>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#MyLogo {
+  height: 45px;
+  width: 70px; 
+}
+#searchBox{
+  height: 40;
+  width: 400;
+}
+#searchButton{
+  height: 40;
+  width: 60;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+    <div class="topnav">
+        <a href="/">
+          <img id="MyLogo" src= "static/images/store_logo.png"/>
+        </a>  
+        <form>
+              <input id="searchBox" type="text" name="searchData">
+              <input id="searchButton" type="submit" value="Search">
+          </form>
+        {% if not loggedIn %}
+          <div id="signInButton">
+              <a class="active" href="/loginForm">Sign In</a>
+        </div>
+          {% else %}
+              <button class="link">Hello, <br> {{firstName}}</button>
+                  <a href="/checkout">Order History</a>
+                  <hr>
+                  <a href="/logout">Sign Out</a>
+            {% endif %}
+          <a class="link" href="/cart"> Cart {{numItems}} </a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </div>
+<div id="title">
+	<a href="/">
+		<img id="MyLogo" src= {{ url_for('static', filename='images/store_logo.png') }} />
+	</a>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	{% else %}
+		<a> Hello, <br>{{firstName}}</a>
+			<a href="/orderHistory">Your orders</a>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="cart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shopping-cart.png')}} id="cartIcon"/>
+			Cart {{numItems}}
+		</a>
+	</div>
+</div>
+<div id="display">
+	<div id="productName">
+		<h1>{{data[1]}}</h1>
+	</div>
+	<div>
+		<img src={{url_for('static', filename='productImages/'+data[4]) }} id="productImage"/>
+	</div>
+
+	<div id="productDescription">
+		<h2>Details</h2>
+		<table id="descriptionTable">
+			<tr>
+				<td>Name</td>
+				<td>{{data[1]}}</td>
+			</tr>
+			<tr>
+				<td>Price</td>
+				<td>${{data[2]}}</td>
+			</tr>
+			<tr>
+				<td>Stock</td>
+				<td>{{data[5]}}</td>
+			</tr>
+		</table>
+		<h2>Description</h2>
+		<p>{{data[3]}}</p>
+	</div>
+	<div id="addToCart">
+		<a href="/addToCart?productId={{request.args.get('productId')}}">Add to Cart</a>
+	</div>
+</div>
+</body>
+</html>

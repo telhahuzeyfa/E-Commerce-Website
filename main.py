@@ -248,6 +248,8 @@ def location(data):
             i += 1
         loc.append(cur)
     return loc
-
+@app.route("/test", methods=['GET','POST'])
+def test():
+    return render_template("navigationBar.html");
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
